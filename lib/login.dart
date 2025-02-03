@@ -46,8 +46,7 @@ class LoginPage extends StatelessWidget {
               hintText: "Username",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none
-              ),
+                  borderSide: BorderSide.none),
               fillColor: Colors.purple.withOpacity(0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
@@ -67,8 +66,7 @@ class LoginPage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {
-          },
+          onPressed: () {},
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -76,7 +74,7 @@ class LoginPage extends StatelessWidget {
           ),
           child: const Text(
             "Login",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20, color: Colors.black),
           ),
         )
       ],
@@ -86,7 +84,8 @@ class LoginPage extends StatelessWidget {
   _forgotPassword(context) {
     return TextButton(
       onPressed: () {},
-      child: const Text("Forgot password?",
+      child: const Text(
+        "Forgot password?",
         style: TextStyle(color: Colors.purple),
       ),
     );
@@ -98,10 +97,11 @@ class LoginPage extends StatelessWidget {
       children: [
         const Text("Dont have an account? "),
         TextButton(
-            onPressed: () {
-            },
-            child: const Text("Sign Up", style: TextStyle(color: Colors.purple),)
-        )
+            onPressed: () {},
+            child: const Text(
+              "Sign Up",
+              style: TextStyle(color: Colors.purple),
+            ))
       ],
     );
   }
