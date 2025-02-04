@@ -1,4 +1,4 @@
-# login_app
+# Budget Planner Mobile App
 
 A new Flutter project.
 
