@@ -42,18 +42,11 @@ jobs:
           echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
           echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
 
-      - name: ⚙️ Setup Melos
-        uses: bluefireteam/melos-action@v3
-
       - name: ⚙️ Install dependencies for all packages
-        run: melos build:pub_get:all
+        run: flutter pub get
 
       - name: 🤖📦 Create Android Tests appbundle release
-        run: |
-          pushd app
-          mkdir debug-symbols
-          flutter build appbundle
-          popd
+        run: flutter build appbundle
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.0.19
@@ -61,5 +54,5 @@ jobs:
           packageName: dev.bernardoamaral.budgetPlanner
           track: qa
           status: completed
-          releaseFiles: ${{ github.workspace }}/app/build/app/outputs/bundle/devRelease/app-release.aab
+          releaseFiles: ${{ github.workspace }}/build/app/outputs/bundle/devRelease/app-release.aab
           serviceAccountJsonPlainText: '${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_JSON }}'
