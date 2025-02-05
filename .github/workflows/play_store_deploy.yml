@@ -43,7 +43,7 @@ jobs:
           echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
 
       - name: 🤖📦 Create Android Tests appbundle release
-        run: flutter pub get && flutter clean && flutter build appbundle --release
+        run: flutter pub get && flutter clean && flutter build appbundle --release --debug
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
