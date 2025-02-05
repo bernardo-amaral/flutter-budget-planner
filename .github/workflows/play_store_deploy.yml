@@ -15,7 +15,7 @@ jobs:
       - name: ⚙️ Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
+          distribution: 'oracle'
           java-version: '21'
           cache: 'gradle'
         id: java
@@ -27,6 +27,10 @@ jobs:
           channel: 'stable'
           cache: true
         id: flutter
+
+        #4 Install Dependencies
+      - name: Install Dependencies
+        run: flutter pub get        
 
       - name: 🔐 Retrieve base64 keystore and decode it to a file
         env:
@@ -42,11 +46,15 @@ jobs:
           echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
           echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
 
-      - name: 🤖📦 Create Android Tests appbundle release
-        run: |
-           flutter pub get 
-           flutter clean 
-           flutter build appbundle --no-tree-shake-icons -stacktrace
+
+       #6 Building APK
+      - name: Build APK
+        run: flutter build apk --release
+
+        #7 Building App Bundle (aab)
+      - name: Build appBundle
+        run: flutter build appbundle
+           
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
