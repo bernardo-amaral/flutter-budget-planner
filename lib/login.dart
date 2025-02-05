@@ -16,8 +16,8 @@ class LoginPage extends StatelessWidget {
             children: [
               _header(context),
               _inputField(context),
-              _forgotPassword(context),
-              _signup(context),
+              //_forgotPassword(context),
+              //_signup(context),
             ],
           ),
         ),
@@ -29,8 +29,8 @@ class LoginPage extends StatelessWidget {
     return const Column(
       children: [
         Text(
-          "Authentication App",
-          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          "Authentication app",
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
         ),
         Text("Enter your credential to login"),
       ],
@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
-              fillColor: Colors.purple.withOpacity(0.1),
+              fillColor: Colors.purple.withValues(alpha: 0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
+            fillColor: Colors.purple.withValues(alpha: 0.1),
             filled: true,
             prefixIcon: const Icon(Icons.password),
           ),
@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget {
           ),
           child: const Text(
             "Login",
-            style: TextStyle(fontSize: 20, color: Colors.black),
+            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         )
       ],
