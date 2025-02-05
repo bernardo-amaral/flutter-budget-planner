@@ -46,7 +46,7 @@ jobs:
         run: |
            flutter pub get 
            flutter clean 
-           flutter build appbundle --no-tree-shake-icons
+           flutter build appbundle --no-tree-shake-icons -stacktrace
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
