@@ -35,16 +35,16 @@ jobs:
 
       - name: 📝🔐 Create keystore.properties file
         env:
-          KEYSTORE_PROPERTIES_PATH: ${{ github.workspace }}/app/android/keystore.properties
+          KEYSTORE_PROPERTIES_PATH: ${{ github.workspace }}/app/android/key.properties
         run: |
-          echo 'devStoreFile=${{ github.workspace }}/android-keystore.jks' > $KEYSTORE_PROPERTIES_PATH
-          echo 'devKeyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'devStorePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'devKeyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'storeFile=${{ github.workspace }}/android-keystore.jks' > $KEYSTORE_PROPERTIES_PATH
+          echo 'keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
 
       - name: 📝 Edit pubspec version
         run: |
-          sed -Ei "s/^version: (.*)/version: ${{ inputs.new-pubspec-version }}/" app/pubspec.yaml
+          sed -Ei "s/^version: (.*)/version: 123/" app/pubspec.yaml
 
       - name: ⚙️ Setup Melos
         uses: bluefireteam/melos-action@v2
@@ -52,21 +52,18 @@ jobs:
       - name: ⚙️ Install dependencies for all packages
         run: melos build:pub_get:all
 
-      - name: 🤖📦 Create Android ${{ inputs.short-environment-name }} appbundle release
+      - name: 🤖📦 Create Android Tests appbundle release
         run: |
           pushd app
           mkdir debug-symbols
-          flutter build appbundle \
-            --release \
-            --flavor dev \
-            --target lib/main.dart
+          flutter build appbundle
           popd
 
-      - name: 🤖🚀 Upload Android ${{ inputs.short-environment-name }} Release to Play Store
+      - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.0.19
         with:
-          packageName: ${{ inputs.package-name }}
-          track: internal
-          status: ${{ inputs.release-status }}
-          releaseFiles: ${{ github.workspace }}/app/build/app/outputs/bundle/devRelease/app-dev-release.aab
+          packageName: dev.bernardoamaral.budgetPlanner
+          track: qa
+          status: completed
+          releaseFiles: ${{ github.workspace }}/app/build/app/outputs/bundle/devRelease/app-release.aab
           serviceAccountJsonPlainText: '${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_JSON }}'
