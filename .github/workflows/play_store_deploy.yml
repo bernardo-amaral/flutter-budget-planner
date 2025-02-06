@@ -30,7 +30,7 @@ jobs:
 
         #4 Install Dependencies
       - name: Install Dependencies
-        run: flutter pub get        
+        run: flutter pub get
 
       - name: 🔐 Retrieve base64 keystore and decode it to a file
         env:
@@ -41,17 +41,13 @@ jobs:
         env:
           KEYSTORE_PROPERTIES_PATH: ${{ github.workspace }}/android/app/key.properties
         run: |
+          echo 'storePassword=medapp' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'keyPassword=medapp' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'keyAlias=upload' >> $KEYSTORE_PROPERTIES_PATH
           echo 'storeFile=${{ github.workspace }}/android-keystore.jks' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
-          cat ${{ github.workspace }}/android/app/key.properties
 
-
-        #7 Building App Bundle (aab)
       - name: Build appBundle
-        run: flutter build appbundle
-           
+        run: flutter build appbundle --release
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
