@@ -45,11 +45,8 @@ jobs:
           echo 'keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
           echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
           echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
+          cat ${{ github.workspace }}/android/app/key.properties
 
-
-       #6 Building APK
-      - name: Build APK
-        run: flutter build apk --release
 
         #7 Building App Bundle (aab)
       - name: Build appBundle
