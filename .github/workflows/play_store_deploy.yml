@@ -47,7 +47,7 @@ jobs:
           echo 'storeFile=${{ github.workspace }}/android-keystore.jks' >> $KEYSTORE_PROPERTIES_PATH
 
       - name: Build appBundle
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --no-tree-shake-icons
 
       - name: 🤖🚀 Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
