@@ -46,6 +46,9 @@ jobs:
           echo 'keyAlias=upload' >> $KEYSTORE_PROPERTIES_PATH
           echo 'storeFile=${{ github.workspace }}/android-keystore.jks' >> $KEYSTORE_PROPERTIES_PATH
 
+      - name: test
+        run: cat ${{ github.workspace }}/android/app/key.properties
+        
       - name: Build appBundle
         run: flutter build appbundle --release --no-tree-shake-icons
 
