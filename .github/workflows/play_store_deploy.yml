@@ -9,7 +9,7 @@ jobs:
     name: Build & deploy
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: ⚙️ Setup Java
@@ -32,27 +32,27 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: 🔐 Retrieve base64 keystore and decode it to a file
+      - name: Retrieve base64 keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_FILE_BASE64 }}
         run: echo $KEYSTORE_BASE64 | base64 --decode > "${{ github.workspace }}/android-keystore.jks"
 
-      - name: 📝🔐 Create keystore.properties file
+      - name: Create key.properties file
         env:
           KEYSTORE_PROPERTIES_PATH: ${{ github.workspace }}/android/app/key.properties
         run: |
-          echo 'storePassword=medapp' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyPassword=medapp' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyAlias=upload' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
+          echo 'keyAlias={{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
           echo 'storeFile=${{ github.workspace }}/android-keystore.jks' >> $KEYSTORE_PROPERTIES_PATH
 
       - name: test
         run: cat ${{ github.workspace }}/android/app/key.properties
-        
+
       - name: Build appBundle
         run: flutter build appbundle --release --no-tree-shake-icons
 
-      - name: 🤖🚀 Upload Android Tests Release to Play Store
+      - name: Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
         with:
           packageName: dev.bernardoamaral.budgetPlanner
