@@ -36,7 +36,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         id: app-release
         with:
-          releaseDirectory: ${{ github.workspace }}/build/app/outputs/bundle/release
+          releaseDirectory: ${{ github.workspace }}/build
           signingKeyBase64: ${{ secrets.KEYSTORE_FILE_BASE64 }}
           alias: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -50,5 +50,5 @@ jobs:
           packageName: dev.bernardoamaral.budgetPlanner
           track: qa
           status: completed
-          releaseFiles: ${{ github.workspace }}/build/app/outputs/bundle/release/app-release.aab
+          releaseFiles: ${{ github.workspace }}/build/app-release.aab
           serviceAccountJsonPlainText: '${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_JSON }}'
