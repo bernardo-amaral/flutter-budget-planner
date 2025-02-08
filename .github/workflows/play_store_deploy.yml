@@ -32,25 +32,17 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Retrieve base64 keystore
+      - name: Sign app APK
+        uses: r0adkll/sign-android-release@v1
+        id: app-release
+        with:
+          releaseDirectory: ${{ github.workspace }}/build/app/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.KEYSTORE_FILE_BASE64 }}
+          alias: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
         env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_FILE_BASE64 }}
-        run: echo $KEYSTORE_BASE64 | base64 --decode > "${{ github.workspace }}/android-keystore.jks"
-
-      - name: Create key.properties file
-        env:
-          KEYSTORE_PROPERTIES_PATH: ${{ github.workspace }}/android/app/key.properties
-        run: |
-          echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}' >> $KEYSTORE_PROPERTIES_PATH
-          echo 'storeFile=${{ github.workspace }}/android-keystore.jks' >> $KEYSTORE_PROPERTIES_PATH
-
-      - name: Flutter doctor
-        run: flutter doctor -v
-
-      - name: Build appBundle
-        run: flutter build appbundle --release --no-tree-shake-icons
+          BUILD_TOOLS_VERSION: '34.0.0'
 
       - name: Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
@@ -58,5 +50,5 @@ jobs:
           packageName: dev.bernardoamaral.budgetPlanner
           track: qa
           status: completed
-          releaseFiles: ${{ github.workspace }}/build/app/outputs/bundle/devRelease/app-release.aab
+          releaseFiles: ${{ github.workspace }}/build/app/outputs/bundle/release/app-release.aab
           serviceAccountJsonPlainText: '${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_JSON }}'
