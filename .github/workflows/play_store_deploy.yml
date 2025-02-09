@@ -44,9 +44,6 @@ jobs:
           cache: true
         id: flutter
 
-      - name: Accept licenses
-        run: flutter doctor --android-licenses -y
-
       - name: Install Dependencies
         run: flutter pub get
 
