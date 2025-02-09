@@ -50,7 +50,7 @@ jobs:
         run: flutter doctor -v
 
       - name: Build appBundle
-        run: flutter build appbundle --no-tree-shake-icons --release -v
+        run: flutter build appbundle --no-tree-shake-icons --release --no-shrink -v
 
       - name: Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
