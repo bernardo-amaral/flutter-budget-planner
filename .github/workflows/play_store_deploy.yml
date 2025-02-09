@@ -43,7 +43,7 @@ jobs:
         id: flutter
 
       - name: Accept licenses
-        run: flutter doctor --android-licenses
+        run: flutter doctor --android-licenses -y
 
       - name: Install Dependencies
         run: flutter pub get
