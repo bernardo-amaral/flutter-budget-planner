@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       drawer: const DrawerMenu(),
       body: Column(children: [
         Text(
-          "Bernardo Amaral",
+          "HOME",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),

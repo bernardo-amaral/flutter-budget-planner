@@ -11,14 +11,12 @@ class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _MainAppBarState extends State<MainAppBar> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       iconTheme: IconThemeData(
-        color: Colors.blue.withAlpha(25),
+        color: Colors.white.withAlpha(250),
       ),
     );
   }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/config/routes.dart';
 
-// import 'package:flutter_medical_app/src/config/route.dart';
-// import 'package:flutter_medical_app/src/themes/light_color.dart';
-
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
 
@@ -46,6 +43,16 @@ class _DrawerMenuState extends State<DrawerMenu> {
             title: const Text('Tela inicial'),
             onTap: () {
               Navigator.pushReplacementNamed(context, Routes.home);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(
+              Icons.logout,
+            ),
+            title: const Text('Logout'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, Routes.login);
             },
           ),
           const Divider(),
