@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/config/routes.dart';
 import 'package:login_app/widgets/AppBar/app_bar.dart';
 import 'package:login_app/widgets/DrawerMenu/drawer_menu.dart';
 import 'package:login_app/widgets/home_blocks.dart';
@@ -46,12 +47,14 @@ class _HomePageState extends State<HomePage> {
         Container(
           margin: const EdgeInsets.all(10),
           child: DropdownSearch<String>(
-            items: (f, cs) => ['Edifício Premier'],
+            items: (f, cs) => ['Edifício Premier', 'Edifício Vila Real'],
             popupProps: PopupProps.menu(
                 disabledItemFn: (item) => item == 'Item 3', fit: FlexFit.loose),
           ),
         ),
-        SizedBox(child: actionInformationBlock(context, totalApartments)),
+        SizedBox(
+            child: actionInformationBlock(
+                context, totalApartments, Routes.apartmentsList)),
       ]),
     );
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget actionInformationBlock(BuildContext context, String totalApartments) {
+Widget actionInformationBlock(
+    BuildContext context, String totalApartments, String routeName) {
   return GestureDetector(
-    onTap: () => Navigator.pushReplacementNamed(context, '/'),
+    onTap: () => Navigator.pushReplacementNamed(context, routeName),
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10, right: 30), 
+      padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10, right: 30),
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
