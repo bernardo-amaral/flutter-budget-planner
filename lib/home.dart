@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/widgets/AppBar/app_bar.dart';
 import 'package:login_app/widgets/DrawerMenu%20/drawer_menu.dart';
 // import 'package:med_easy_app/src/database_manager.dart';
 // import 'package:med_easy_app/src/widgets/DrawerMenu/drawer_menu.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: const MainAppBar(),
+      appBar: MainAppBar(),
       drawer: const DrawerMenu(),
       body: Column(children: [
         Text(
