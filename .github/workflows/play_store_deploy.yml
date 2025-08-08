@@ -49,7 +49,7 @@ jobs:
       - name: Upload Android Tests Release to Play Store
         uses: r0adkll/upload-google-play@v1.1.3
         with:
-          packageName: dev.bernardoamaral.budgetPlanner
+          packageName: dev.bernardoamaral.budgetplanner
           track: qa
           status: completed
           releaseFiles: ${{ github.workspace }}/build/app/outputs/bundle/release/app-release.aab
