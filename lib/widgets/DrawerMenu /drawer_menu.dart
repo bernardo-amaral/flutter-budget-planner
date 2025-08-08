@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:med_easy_app/routes.dart';
+import 'package:login_app/config/routes.dart';
+
 // import 'package:flutter_medical_app/src/config/route.dart';
 // import 'package:flutter_medical_app/src/themes/light_color.dart';
 
 class DrawerMenu extends StatefulWidget {
-  const DrawerMenu({Key? key}) : super(key: key);
+  const DrawerMenu({super.key});
 
   @override
   State<DrawerMenu> createState() => _DrawerMenuState();
@@ -47,33 +48,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
               Navigator.pushReplacementNamed(context, Routes.home);
             },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.people,
-            ),
-            title: const Text('Adicionar paciente'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.patientsCreate);
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.people,
-            ),
-            title: const Text('Pacientes'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.patientsList);
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.schedule_sharp,
-            ),
-            title: const Text('Agenda'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.schedules);
-            },
-          ),
           const Divider(),
           const AboutListTile(
             icon: Icon(
@@ -82,9 +56,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
             applicationIcon: Icon(
               Icons.local_play,
             ),
-            applicationName: 'Medical App',
+            applicationName: 'Gestão condominial',
             applicationVersion: '1.0.22',
-            applicationLegalese: '© 2023 Bernardo Amaral',
+            applicationLegalese: '© 2025 Bernardo Amaral',
             aboutBoxChildren: [
               ///Content goes here...
             ],

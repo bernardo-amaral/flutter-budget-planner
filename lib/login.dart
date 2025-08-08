@@ -1,7 +1,9 @@
 //https://techdynasty.medium.com/login-signup-page-design-with-code-c593e7c82a4c
 import 'package:flutter/material.dart';
+import 'package:login_app/config/routes.dart';
 
 class LoginPage extends StatelessWidget {
+  static const String routeName = '/login';
   const LoginPage({super.key});
 
   @override
@@ -29,10 +31,10 @@ class LoginPage extends StatelessWidget {
     return const Column(
       children: [
         Text(
-          "Authentication app",
+          "Gestão predial",
           style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("Informe suas credenciais de acesso"),
       ],
     );
   }
@@ -43,22 +45,22 @@ class LoginPage extends StatelessWidget {
       children: [
         TextField(
           decoration: InputDecoration(
-              hintText: "Username",
+              hintText: "Usuário",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
-              fillColor: Colors.purple.withValues(alpha: 0.1),
+              fillColor: Colors.blue.withValues(alpha: 0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
         const SizedBox(height: 10),
         TextField(
           decoration: InputDecoration(
-            hintText: "Password",
+            hintText: "Senha",
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.purple.withValues(alpha: 0.1),
+            fillColor: Colors.blue.withValues(alpha: 0.1),
             filled: true,
             prefixIcon: const Icon(Icons.password),
           ),
@@ -66,11 +68,13 @@ class LoginPage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, Routes.home);
+          },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.green,
           ),
           child: const Text(
             "Login",
@@ -86,7 +90,7 @@ class LoginPage extends StatelessWidget {
       onPressed: () {},
       child: const Text(
         "Forgot password?",
-        style: TextStyle(color: Colors.purple),
+        style: TextStyle(color: Colors.blue),
       ),
     );
   }
@@ -100,7 +104,7 @@ class LoginPage extends StatelessWidget {
             onPressed: () {},
             child: const Text(
               "Sign Up",
-              style: TextStyle(color: Colors.purple),
+              style: TextStyle(color: Colors.blue),
             ))
       ],
     );
