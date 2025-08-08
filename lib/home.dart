@@ -45,10 +45,13 @@ class _HomePageState extends State<HomePage> {
       appBar: MainAppBar(),
       drawer: const DrawerMenu(),
       body: Column(children: [
-        Text(
-          "HOME",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+        Container(
+          margin: const EdgeInsets.all(24),
+          child: const Text(
+            "HOME",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         //SizedBox(
