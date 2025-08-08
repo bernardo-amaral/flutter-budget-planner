@@ -7,7 +7,6 @@ import 'package:login_app/widgets/DrawerMenu%20/drawer_menu.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/';
-
   const HomePage({super.key});
 
   @override
@@ -18,25 +17,25 @@ class _HomePageState extends State<HomePage> {
   late String totalAppointments = '0';
   late String totalTodayAppointments = '0';
 
-  _countAllAppointments() async {
-    // final resultSet = await DatabaseProvider.db.getAppointmentsAll();
-    setState(() {
-      // totalAppointments = resultSet.toList().length.toString();
-    });
-  }
+  // _countAllAppointments() async {
+  //   // final resultSet = await DatabaseProvider.db.getAppointmentsAll();
+  //   setState(() {
+  //     // totalAppointments = resultSet.toList().length.toString();
+  //   });
+  // }
 
-  _countTodayAppointments() async {
-    // final resultSet = await DatabaseProvider.db.getAppointmentsToday();
-    setState(() {
-      //totalTodayAppointments = resultSet.toList().length.toString();
-    });
-  }
+  // _countTodayAppointments() async {
+  //   // final resultSet = await DatabaseProvider.db.getAppointmentsToday();
+  //   setState(() {
+  //     //totalTodayAppointments = resultSet.toList().length.toString();
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    _countAllAppointments();
-    _countTodayAppointments();
+    // _countAllAppointments();
+    //_countTodayAppointments();
   }
 
   @override

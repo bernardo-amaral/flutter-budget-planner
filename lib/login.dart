@@ -1,4 +1,3 @@
-//https://techdynasty.medium.com/login-signup-page-design-with-code-c593e7c82a4c
 import 'package:flutter/material.dart';
 import 'package:login_app/config/routes.dart';
 
@@ -8,20 +7,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          margin: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _header(context),
-              _inputField(context),
-              //_forgotPassword(context),
-              //_signup(context),
-            ],
-          ),
+    return Scaffold(
+      body: Container(
+        margin: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _header(context),
+            _inputField(context),
+            //_forgotPassword(context),
+            //_signup(context),
+          ],
         ),
       ),
     );
@@ -49,7 +45,7 @@ class LoginPage extends StatelessWidget {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
-              fillColor: Colors.blue.withValues(alpha: 0.1),
+              fillColor: Colors.blue.withAlpha(25),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
@@ -60,7 +56,7 @@ class LoginPage extends StatelessWidget {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.blue.withValues(alpha: 0.1),
+            fillColor: Colors.blue.withAlpha(25),
             filled: true,
             prefixIcon: const Icon(Icons.password),
           ),
