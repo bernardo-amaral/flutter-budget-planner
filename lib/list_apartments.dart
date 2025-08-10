@@ -109,7 +109,9 @@ class _PatientsListPageState extends State<ApartmentsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
+      appBar: MainAppBar(
+        showBack: true,
+      ),
       drawer: const DrawerMenu(),
       body: SingleChildScrollView(
         child: Column(

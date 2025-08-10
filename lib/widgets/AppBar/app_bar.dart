@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
-  MainAppBar({super.key}) : preferredSize = Size.fromHeight(kToolbarHeight);
+  final bool showMenu;
+  final bool showBack;
+
+  MainAppBar({
+    super.key,
+    this.showMenu = true,
+    this.showBack = false,
+  }) : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
   final Size preferredSize;
@@ -15,8 +22,22 @@ class _MainAppBarState extends State<MainAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      iconTheme: IconThemeData(
-        color: Colors.white.withAlpha(250),
+      automaticallyImplyLeading: false,
+      leading: widget.showBack
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).maybePop(),
+            )
+          : (widget.showMenu
+              ? Builder(
+                  builder: (context) => IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                )
+              : null),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
       ),
     );
   }
