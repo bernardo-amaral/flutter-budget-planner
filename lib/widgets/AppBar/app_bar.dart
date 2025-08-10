@@ -4,7 +4,7 @@ class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool showMenu;
   final bool showBack;
 
-  MainAppBar({
+  const MainAppBar({
     super.key,
     this.showMenu = true,
     this.showBack = false,
