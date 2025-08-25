@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:login_app/config/routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login(
       BuildContext context, String username, String password) async {
     if (username.isNotEmpty && password.isNotEmpty) {
-      final url = Uri.parse('http://192.168.15.13:9000/auth/login');
+      final url = Uri.parse("${dotenv.env['API_BASE_URL']}/auth/login");
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
