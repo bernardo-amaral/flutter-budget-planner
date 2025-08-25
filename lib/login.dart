@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:login_app/config/routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:login_app/services/api_service.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login(
       BuildContext context, String username, String password) async {
     if (username.isNotEmpty && password.isNotEmpty) {
-      final url = Uri.parse("${dotenv.env['API_BASE_URL']}/auth/login");
+      final url = ApiService.endpoint("/auth/login");
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},

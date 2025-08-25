@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:login_app/config/routes.dart';
 import 'package:login_app/model/condominium.dart';
+import 'package:login_app/services/api_service.dart';
 import 'package:login_app/widgets/AppBar/app_bar.dart';
 import 'package:login_app/widgets/DrawerMenu/drawer_menu.dart';
 import 'package:login_app/widgets/home_blocks.dart';
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   late String totalTodayAppointments = '0';
 
   Future<List<Condominium>> _fetchBuildings() async {
-    final url = Uri.parse("${dotenv.env['API_BASE_URL']}/condominiums");
+    final url = ApiService.endpoint("/condominiums");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
