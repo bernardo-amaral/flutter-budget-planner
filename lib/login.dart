@@ -1,9 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/config/routes.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+
+  @override
+  void dispose() {
+    _userController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login(
+      BuildContext context, String username, String password) async {
+    if (username.isNotEmpty && password.isNotEmpty) {
+      final url = Uri.parse('http://192.168.15.13:9000/auth/login');
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'username': username, 'password': password}),
+      );
+
+      if (response.statusCode == 200) {
+        Navigator.pushReplacementNamed(context, Routes.home);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Usuário ou senha inválidos')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +60,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _header(context) {
+  Widget _header(context) {
     return const Column(
       children: [
         Text(
@@ -35,27 +72,32 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _inputField(context) {
+  Widget _inputField(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          controller: _userController,
           decoration: InputDecoration(
-              hintText: "Usuário",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Colors.blue.withAlpha(25),
-              filled: true,
-              prefixIcon: const Icon(Icons.person)),
+            hintText: "Usuário",
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
+            ),
+            fillColor: Colors.blue.withAlpha(25),
+            filled: true,
+            prefixIcon: const Icon(Icons.person),
+          ),
         ),
         const SizedBox(height: 10),
         TextField(
+          controller: _passController,
           decoration: InputDecoration(
             hintText: "Senha",
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
+            ),
             fillColor: Colors.blue.withAlpha(25),
             filled: true,
             prefixIcon: const Icon(Icons.password),
@@ -65,7 +107,7 @@ class LoginPage extends StatelessWidget {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.home);
+            _login(context, _userController.text, _passController.text);
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
@@ -77,31 +119,6 @@ class LoginPage extends StatelessWidget {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         )
-      ],
-    );
-  }
-
-  _forgotPassword(context) {
-    return TextButton(
-      onPressed: () {},
-      child: const Text(
-        "Forgot password?",
-        style: TextStyle(color: Colors.blue),
-      ),
-    );
-  }
-
-  _signup(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Dont have an account? "),
-        TextButton(
-            onPressed: () {},
-            child: const Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.blue),
-            ))
       ],
     );
   }
